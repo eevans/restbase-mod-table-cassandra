@@ -80,6 +80,8 @@ var keys = {
     rev: null,
 };
 
+var total = 0;
+
 function processRow (row) {
     // Create a new set of keys
     var newKeys = {
@@ -100,7 +102,10 @@ function processRow (row) {
     }
     keys = newKeys;
 
-    console.log('processing: ', keys.rev, new Date(row.tid.getDate()));
+    total++;
+    if ((total % 500000) === 0) {
+        console.log(new Date() + ': processed ' + total + ' total entries');
+    }
 
     // Now figure out what to do with this row
     if (false && counts.title === 0 && counts.rev === 0
